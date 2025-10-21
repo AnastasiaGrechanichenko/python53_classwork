@@ -40,22 +40,35 @@ journal =[
 #     print()
 
 subjects=["рус","мат","лит", "физ"]
+student_names = ["Ivanov","Petrov"]
 journal = []
 
 english_marks=[90,80,70,99]
 
 def add_subject(subject_name):
     subject_name = subject_name[:3]
-    subject.append(subject_name)
+    subjects.append(subject_name)
     for i in journal:
         i.append(0)
 
-def add_marks(number, subject,mark):
+# def add_marks(student, subject,mark):
+#     journal[subject].append(mark)
+
+def change_mark(number,subject,mark):
+    index= subjects.index(subject)
+    journal[number-1][index]=mark
+
+def remove_student(index):
+    journal.pop(index-1)
 
 
+def delete_subject(subject):
+    for i in subjects:
+        subject
 
 def add_student():
     journal.append([])
+
     for i in subjects:
         journal[len(journal)-1].append(0)
 
@@ -72,13 +85,49 @@ def show_journal():
         print()
 
 
+def best_student():
+    best_index = 0
+    best_summa = 0
+    for mark in range(len(journal)):
+        if sum(journal[i])>best_summa:
+            best_index=i
+    return best_index
 
+
+def show_menu():
+    action = int(input(
+        '''
+        
+        1. вывод журнала 
+        2. добавление студента
+        3. добавление дисциплины
+        4. удаление студента
+        5. удаление дисциплины
+        6. замена оценки
+        7. выйти
+        '''
+    ))
+    match action:
+        case 1: show_journal()
+        case 2: add_student()
+        case 3: add_subject()
+            add_subject(input("введите название дисциплины: "))
+        case 4: remove_student()
+                remove_student(input("введите имя студента: "))
+        case 6:
+            number = int(input("Введите название дисциплины"))
+            mark = int (input("Введите оценку"))
+            change_mark(number,subject,mark)
+        case 7:
+            exit()
+        case _: show_menu
 
 if __name__ == '__main__':
     add_subject("английский")
     add_subject("алгебра")
     add_student()
-
+    change_mark(2,"мат","67")
+    remove_student(1)
     show_journal()
 
 
